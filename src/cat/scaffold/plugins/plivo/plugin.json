@@ -1,0 +1,12 @@
+{
+    "name": "Plivo",
+    "version": "0.1.0",
+    "description": "Send SMS, place outbound calls, and answer inbound calls via Plivo.",
+    "author_name": "Plivo",
+    "author_url": "https://www.plivo.com",
+    "plugin_url": "https://www.plivo.com",
+    "tags": "plivo, sms, voice, telephony",
+    "thumb": "",
+    "min_cat_version": "2.0.0",
+    "max_cat_version": "Unknown"
+}
