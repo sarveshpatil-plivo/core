@@ -1,8 +1,8 @@
 # Plivo plugin
 
-A Cheshire Cat plugin that adds Plivo telephony capabilities. It mirrors the
-structure of the built-in `uploads` plugin: a `plugin.json` manifest plus
-decorated modules the mad hatter auto-discovers when the plugin is installed.
+A Cheshire Cat plugin that adds Plivo telephony capabilities. It ships a
+`plugin.json` manifest plus decorated modules the mad hatter auto-discovers
+when the plugin is installed.
 
 ## Capabilities
 
@@ -21,8 +21,7 @@ The tools read credentials from the environment:
 - `PLIVO_AUTH_TOKEN` — Plivo Auth Token (HTTP Basic password).
 - `PLIVO_SRC` — the Plivo sender number / caller ID in E.164 format.
 
-Get credentials from the Plivo console at
-https://cx.plivo.com/?utm_source=github&utm_medium=oss&utm_campaign=cheshire-cat
+Get credentials from the [Plivo console](https://cx.plivo.com/?utm_source=github&utm_medium=oss&utm_campaign=cheshire-cat).
 
 ## Wiring the inbound webhook
 
