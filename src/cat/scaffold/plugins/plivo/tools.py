@@ -29,18 +29,26 @@ async def send_sms(dst: str, text: str) -> str:
 
 
 @tool
-async def make_call(to: str, answer_url: str) -> str:
-    """Place an outbound Plivo call. Input is the destination number in E.164 format and the answer_url Plivo fetches for call-flow XML."""
+async def make_call(to: str, answer_url: str = "", answer_method: str = "POST") -> str:
+    """Place an outbound Plivo call. Input is the destination number in E.164 format. answer_url is optional; when left blank it uses the PLIVO_ANSWER_URL env var, which should point at this plugin's own /plivo/answer endpoint. answer_method chooses how Plivo fetches answer_url, either GET or POST (default POST)."""
 
     auth_id = os.getenv("PLIVO_AUTH_ID")
     auth_token = os.getenv("PLIVO_AUTH_TOKEN")
     src = os.getenv("PLIVO_SRC")
 
+    answer_url = answer_url or os.getenv("PLIVO_ANSWER_URL", "")
+    if not answer_url:
+        return "No answer_url provided and PLIVO_ANSWER_URL is not set."
+
+    answer_method = answer_method.upper()
+    if answer_method not in ("GET", "POST"):
+        return f"answer_method must be GET or POST, got {answer_method}."
+
     async with httpx.AsyncClient() as client:
         response = await client.post(
             f"{PLIVO_API_BASE}/{auth_id}/Call/",
             auth=(auth_id, auth_token),
-            json={"from": src, "to": to, "answer_url": answer_url},
+            json={"from": src, "to": to, "answer_url": answer_url, "answer_method": answer_method},
         )
 
     if response.status_code == 201:
